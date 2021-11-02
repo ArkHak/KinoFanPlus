@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KinoFanPlus</string>
+    <string name="films">Films</string>
+    <string name="favorites_films">Favorites films</string>
 </resources>
