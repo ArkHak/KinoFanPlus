@@ -1,9 +1,10 @@
-package com.example.kinofanplus
+package com.example.kinofanplus.viewmodel
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -19,6 +20,5 @@ class MainActivity : AppCompatActivity() {
         val buttonNavigationPanel: BottomNavigationView = binding.buttonNavigationPanel
         val navigationController = findNavController(R.id.navigation_fragment_container)
         buttonNavigationPanel.setupWithNavController(navigationController)
-
     }
 }

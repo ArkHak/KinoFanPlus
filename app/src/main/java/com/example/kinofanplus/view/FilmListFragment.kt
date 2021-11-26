@@ -1,0 +1,68 @@
+package com.example.kinofanplus.view
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import com.example.kinofanplus.R
+import com.example.kinofanplus.databinding.FragmentFilmListBinding
+import com.example.kinofanplus.viewmodel.AppState
+import com.example.kinofanplus.viewmodel.FilmListVM
+
+class FilmListFragment : Fragment() {
+
+    private var _binding: FragmentFilmListBinding? = null
+    private val binding get() = _binding!!
+
+    private val adapter by lazy { MovieListAdapter() }
+
+    private val viewModel: FilmListVM by lazy {
+        ViewModelProvider(this).get(FilmListVM::class.java)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentFilmListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        adapter.listenerClick = MovieListAdapter.OnMovieClickListener { movie ->
+            val bundle = Bundle()
+            bundle.putParcelable(MovieDetailFragment.MOVIE_KEY, movie)
+            findNavController(requireParentFragment()).navigate(
+                R.id.action_navigation_list_films_to_movieDetailFragment,
+                bundle
+            )
+        }
+        binding.recyclerViewMovieList.adapter = adapter
+
+        viewModel.liveData.observe(viewLifecycleOwner) { state ->
+            renderData(state)
+        }
+
+        viewModel.getMovieFromServer()
+    }
+
+    private fun renderData(state: AppState?) {
+        when (state) {
+            is AppState.Success -> {
+                adapter.movieList = state.movie
+            }
+            is AppState.Error -> Log.e("TAG", "Exception Load")
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
