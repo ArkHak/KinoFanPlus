@@ -12,11 +12,8 @@ class MovieDetailFragment : Fragment() {
 
     companion object {
         const val MOVIE_KEY = "MOVIE_KEY"
-        fun newInstance(bundle: Bundle): MovieDetailFragment {
-            val fragment = MovieDetailFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
+        fun newInstance(bundle: Bundle): MovieDetailFragment =
+            MovieDetailFragment().apply { arguments = bundle }
     }
 
     private var _binding: FragmentMovieDetailBinding? = null
@@ -34,11 +31,8 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movie = arguments?.getParcelable<Movie>(MOVIE_KEY)
-
-        if (movie != null) {
-            // TODO: 18.11.2021 Добавить отрисовку-вставку данных, ограничить RV(чтоб не выходило за границы)
-            //TODO: Наполнить фрагмент
+//сразу проверяем на null, и если нет, то отрисовываем
+        arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
             with(binding) {
                 titleMovie.text = movie.title
                 releaseDateMovie.text = movie.releaseDate

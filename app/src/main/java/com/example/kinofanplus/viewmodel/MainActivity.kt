@@ -10,15 +10,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    private val buttonNavigationPanel: BottomNavigationView by lazy { binding.buttonNavigationPanel }
+
+    private val navigationController by lazy { findNavController(R.id.navigation_fragment_container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val buttonNavigationPanel: BottomNavigationView = binding.buttonNavigationPanel
-        val navigationController = findNavController(R.id.navigation_fragment_container)
         buttonNavigationPanel.setupWithNavController(navigationController)
     }
 }

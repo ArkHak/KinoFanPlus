@@ -36,15 +36,17 @@ class FilmListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter.listenerClick = MovieListAdapter.OnMovieClickListener { movie ->
-            val bundle = Bundle()
-            bundle.putParcelable(MovieDetailFragment.MOVIE_KEY, movie)
-            findNavController(requireParentFragment()).navigate(
-                R.id.action_navigation_list_films_to_movieDetailFragment,
-                bundle
-            )
-        }
-        binding.recyclerViewMovieList.adapter = adapter
+            Bundle().also { bundle ->
+                bundle.putParcelable(MovieDetailFragment.MOVIE_KEY, movie)
+                findNavController(requireParentFragment()).navigate(
+                    R.id.action_navigation_list_films_to_movieDetailFragment,
+                    bundle
+                )
+            }
 
+        }
+
+        binding.recyclerViewMovieList.adapter = adapter
         viewModel.liveData.observe(viewLifecycleOwner) { state ->
             renderData(state)
         }
@@ -58,6 +60,10 @@ class FilmListFragment : Fragment() {
                 adapter.movieList = state.movie
             }
             is AppState.Error -> Log.e("TAG", "Exception Load")
+
+            else -> {
+                Log.e("TAG", "ELSE TAG")
+            }
         }
     }
 
