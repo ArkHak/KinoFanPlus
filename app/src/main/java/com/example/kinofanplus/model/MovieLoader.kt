@@ -3,6 +3,9 @@ package com.example.kinofanplus.model
 import android.util.Log
 import com.example.kinofanplus.BuildConfig
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
@@ -14,10 +17,9 @@ class MovieLoader(
     private val listener: MovieLoaderListener
 ) {
 
-    //TODO исправить выход в интернет с помощью корутин, спрятать ключ
     fun goToInternet() {
 
-        Thread() {
+        CoroutineScope(Dispatchers.IO).launch {
             val uri =
                 URL("https://api.themoviedb.org/3/movie/$idMovie?api_key=${BuildConfig.MOVIE_API_KEY}&language=ru-RU")
             var urlConnection: HttpsURLConnection? = null
@@ -42,7 +44,7 @@ class MovieLoader(
             } finally {
                 urlConnection?.disconnect()
             }
-        }.start()
+        }
 
     }
 

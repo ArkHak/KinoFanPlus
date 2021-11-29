@@ -10,6 +10,9 @@ import com.example.kinofanplus.databinding.FragmentMovieDetailBinding
 import com.example.kinofanplus.model.Movie
 import com.example.kinofanplus.model.MovieDTO
 import com.example.kinofanplus.model.MovieLoader
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MovieDetailFragment : Fragment() {
 
@@ -39,14 +42,15 @@ class MovieDetailFragment : Fragment() {
 
             MovieLoader(movie.id, object : MovieLoader.MovieLoaderListener {
                 override fun onLoaded(movieDTO: MovieDTO) {
-                    requireActivity().runOnUiThread {
+
+                    CoroutineScope(Dispatchers.Main).launch {
                         displayMovie(movieDTO)
                     }
                 }
 
                 override fun onFailed(throwable: Throwable) {
                     //TODO добавить reload(Snackbar)
-                    requireActivity().runOnUiThread {
+                    CoroutineScope(Dispatchers.Main).launch {
                         Toast.makeText(
                             requireContext(),
                             throwable.localizedMessage,
