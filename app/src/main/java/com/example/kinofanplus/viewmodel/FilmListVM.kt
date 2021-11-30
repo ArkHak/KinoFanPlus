@@ -17,7 +17,7 @@ class FilmListVM(
     val liveData: LiveData<AppState> = liveDataToObserve
 
     //    fun getMovieFromLocalSource() = getDataFromLocalSource()
-    fun getMovieFromServer() = getDataFromLocalSource()
+    fun getMovieFromServer() = getMovieFromServerSource()
 
     private fun getDataFromLocalSource() {
         liveDataToObserve.value = AppState.Loading
@@ -25,6 +25,15 @@ class FilmListVM(
         CoroutineScope(Dispatchers.IO).launch {
             liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
         }
+    }
+
+    private fun getMovieFromServerSource(){
+        liveDataToObserve.value = AppState.Loading
+
+        CoroutineScope(Dispatchers.IO).launch {
+            liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
+        }
+
     }
 
 }
