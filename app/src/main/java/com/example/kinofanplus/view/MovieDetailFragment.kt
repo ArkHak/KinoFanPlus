@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.FragmentMovieDetailBinding
-import com.example.kinofanplus.model.Movie
 import com.example.kinofanplus.model.MovieDTO
 import com.example.kinofanplus.model.MovieLoader
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,9 +39,8 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //сразу проверяем на null, и если нет, то отрисовываем
-        arguments?.getParcelable<Movie>(MOVIE_KEY)?.let { movie ->
-
-            MovieLoader(movie.id, object : MovieLoader.MovieLoaderListener {
+        arguments?.getInt(MOVIE_KEY)?.let { id ->
+            MovieLoader(id, object : MovieLoader.MovieLoaderListener {
                 override fun onLoaded(movieDTO: MovieDTO) {
 
                     CoroutineScope(Dispatchers.Main).launch {
@@ -67,9 +67,19 @@ class MovieDetailFragment : Fragment() {
             titleMovie.text = movie.title
             originalTitleMovie.text = movie.original_title
             releaseDateMovie.text = movie.release_date
-            voteAverageMovie.text = movie.vote_average.toString()
+            voteAverageMovie.text = movie.voteAverage.toString()
             overviewMovie.text = movie.overview
         }
+        Picasso.get()
+            .load("$POSTER_BASE_URL${movie.posterPath}")
+            //.placeholder(R.drawable.user_placeholder)
+            .error(R.drawable.tmp_no_poster)
+            .into(binding.moviePoster)
+        Picasso.get()
+            .load("$POSTER_BASE_URL${movie.posterPath}")
+            //.placeholder(R.drawable.user_placeholder)
+            .error(R.drawable.tmp_no_poster)
+            .into(binding.backgroundPoster)
     }
 
     override fun onDestroyView() {

@@ -1,4 +1,4 @@
-package com.example.kinofanplus.model
+package com.example.kinofanplus.model.movie_list_gson
 
 
 import android.os.Parcelable

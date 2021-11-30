@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.ItemMovieListBinding
-import com.example.kinofanplus.model.Result
+import com.example.kinofanplus.model.movie_list_gson.Result
 import com.squareup.picasso.Picasso
 
 const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500/"
