@@ -1,5 +1,6 @@
 package com.example.kinofanplus.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieHolder>() {
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         holder.bind(movieList[position])
+        Log.d("TGH", position.toString())
     }
 
     override fun getItemCount(): Int = movieList.size

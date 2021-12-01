@@ -33,7 +33,8 @@ class FilmListVM(
         CoroutineScope(Dispatchers.IO).launch {
             liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
         }
-
     }
+
+    //TODO Надо сделать LiveData на DetailMovie
 
 }

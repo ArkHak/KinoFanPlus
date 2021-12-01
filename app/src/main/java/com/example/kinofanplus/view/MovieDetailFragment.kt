@@ -1,19 +1,19 @@
 package com.example.kinofanplus.view
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.FragmentMovieDetailBinding
-import com.example.kinofanplus.model.MovieDTO
-import com.example.kinofanplus.model.MovieLoader
+import com.example.kinofanplus.model.*
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MovieDetailFragment : Fragment() {
 
@@ -25,6 +25,26 @@ class MovieDetailFragment : Fragment() {
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
+
+    //получение отправленного интента
+    private val localResultBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.getStringExtra(RESULT_EXTRA)) {
+                SUCCESS_RESULT -> {
+                    intent.getParcelableExtra<MovieDTO>(MOVIE_DETAIL_EXTRA)
+                        ?.let { displayMovie(it) }
+                }
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//регистрируем слушаттеля BroadcastManager на созданный интент по имени
+        LocalBroadcastManager.getInstance(requireContext())
+            .registerReceiver(localResultBroadcastReceiver, IntentFilter(DETAILS_INTENT_FILTER))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,26 +60,16 @@ class MovieDetailFragment : Fragment() {
 
 //сразу проверяем на null, и если нет, то отрисовываем
         arguments?.getInt(MOVIE_KEY)?.let { id ->
-            MovieLoader(id, object : MovieLoader.MovieLoaderListener {
-                override fun onLoaded(movieDTO: MovieDTO) {
-
-                    CoroutineScope(Dispatchers.Main).launch {
-                        displayMovie(movieDTO)
-                    }
-                }
-
-                override fun onFailed(throwable: Throwable) {
-                    //TODO добавить reload(Snackbar)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        Toast.makeText(
-                            requireContext(),
-                            throwable.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            }).goToInternet()
+            getMovie(id)
         }
+    }
+
+    private fun getMovie(IDMovie: Int) {
+
+        requireActivity().startService(
+            Intent(requireContext(), MainService::class.java).apply {
+                putExtra(ID_MOVIE, IDMovie)
+            })
     }
 
     private fun displayMovie(movie: MovieDTO) {
@@ -70,11 +80,13 @@ class MovieDetailFragment : Fragment() {
             voteAverageMovie.text = movie.voteAverage.toString()
             overviewMovie.text = movie.overview
         }
+
         Picasso.get()
             .load("$POSTER_BASE_URL${movie.posterPath}")
             //.placeholder(R.drawable.user_placeholder)
             .error(R.drawable.tmp_no_poster)
             .into(binding.moviePoster)
+
         Picasso.get()
             .load("$POSTER_BASE_URL${movie.posterPath}")
             //.placeholder(R.drawable.user_placeholder)
@@ -83,6 +95,10 @@ class MovieDetailFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        //отписка от слушателя
+        LocalBroadcastManager.getInstance(requireContext())
+            .unregisterReceiver(localResultBroadcastReceiver)
+
         super.onDestroyView()
         _binding = null
     }

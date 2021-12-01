@@ -25,6 +25,7 @@ fun getListMovies(): MutableList<Result> {
     val dataList: MutableList<Result> = mutableListOf()
 
 //TODO на retrofit засунуть в coroutines
+
     val uri =
         URL("https://api.themoviedb.org/3/movie/now_playing?api_key=${BuildConfig.MOVIE_API_KEY}&language=ru-RU&page=1")
     var urlConnection: HttpsURLConnection? = null

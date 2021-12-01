@@ -1,7 +1,10 @@
 package com.example.kinofanplus.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MovieDTO(
     val id: Int?,
     val title: String?,
@@ -12,7 +15,6 @@ data class MovieDTO(
     val voteAverage: Double?,
     @SerializedName("poster_path")
     val posterPath: String,
-
-    )
+) : Parcelable
 
 //TODO получить массив жанров
