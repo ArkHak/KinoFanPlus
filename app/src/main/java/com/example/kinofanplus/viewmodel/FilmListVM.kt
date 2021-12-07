@@ -10,31 +10,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FilmListVM(
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
+    private val liveDataToObserve: MutableLiveData<AppStateGetMovieList> = MutableLiveData(),
     private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
-    val liveData: LiveData<AppState> = liveDataToObserve
+    val liveData: LiveData<AppStateGetMovieList> = liveDataToObserve
 
     //    fun getMovieFromLocalSource() = getDataFromLocalSource()
     fun getMovieFromServer() = getMovieFromServerSource()
 
     private fun getDataFromLocalSource() {
-        liveDataToObserve.value = AppState.Loading
+        liveDataToObserve.value = AppStateGetMovieList.Loading
 
         CoroutineScope(Dispatchers.IO).launch {
-            liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
+            liveDataToObserve.postValue(AppStateGetMovieList.Success(repository.getMovieFromServer()))
         }
     }
 
-    private fun getMovieFromServerSource(){
-        liveDataToObserve.value = AppState.Loading
+    private fun getMovieFromServerSource() {
+        liveDataToObserve.value = AppStateGetMovieList.Loading
 
         CoroutineScope(Dispatchers.IO).launch {
-            liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
+            liveDataToObserve.postValue(AppStateGetMovieList.Success(repository.getMovieFromServer()))
         }
     }
-
-    //TODO Надо сделать LiveData на DetailMovie
-
 }

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.FragmentFilmListBinding
-import com.example.kinofanplus.viewmodel.AppState
+import com.example.kinofanplus.viewmodel.AppStateGetMovieList
 import com.example.kinofanplus.viewmodel.FilmListVM
 
 class FilmListFragment : Fragment() {
@@ -54,12 +54,12 @@ class FilmListFragment : Fragment() {
         viewModel.getMovieFromServer()
     }
 
-    private fun renderData(state: AppState?) {
+    private fun renderData(state: AppStateGetMovieList?) {
         when (state) {
-            is AppState.Success -> {
+            is AppStateGetMovieList.Success -> {
                 adapter.movieList = state.movie
             }
-            is AppState.Error -> Log.e("TAG", "Exception Load")
+            is AppStateGetMovieList.Error -> Log.e("TAG", "Exception Load")
 
             else -> {
                 Log.e("TAG", "ELSE TAG")
