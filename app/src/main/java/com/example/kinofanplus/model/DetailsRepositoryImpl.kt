@@ -1,11 +1,13 @@
 package com.example.kinofanplus.model
 
-import okhttp3.Callback
+import retrofit2.Callback
+import com.example.kinofanplus.model.movie_list_gson.Result
+
 
 class DetailsRepositoryImpl(private val remoteDataSource: RemoteDataSource) : DetailsRepository {
 
-    override fun getMovieDetailFromServer(requestList: String, callback: Callback) {
+    override fun getMovieDetailFromServer(requestID: Int, callback: Callback<Result>) {
 //requestID????
-        remoteDataSource.getMovieDetail(requestList, callback)
+        remoteDataSource.getMovieDetail(requestID, callback)
     }
 }

@@ -8,12 +8,9 @@ import com.example.kinofanplus.model.DetailsRepository
 import com.example.kinofanplus.model.DetailsRepositoryImpl
 import com.example.kinofanplus.model.RemoteDataSource
 import com.example.kinofanplus.model.movie_list_gson.Result
-import com.google.gson.Gson
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
-import java.text.ParseException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MovieDetailVM : ViewModel() {
     private val repository: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource())
@@ -27,26 +24,21 @@ class MovieDetailVM : ViewModel() {
         val link =
             "https://api.themoviedb.org/3/movie/$id?api_key=${BuildConfig.MOVIE_API_KEY}&language=ru-RU"
 
-        repository.getMovieDetailFromServer(link, object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                detailLiveData.postValue(AppStateGetMovieDetails.Error(e))
+        repository.getMovieDetailFromServer(id, object : Callback<Result> {
+
+            override fun onFailure(call: Call<Result>, t: Throwable) {
+                detailLiveData.postValue(AppStateGetMovieDetails.Error(t))
             }
 
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.string()?.let { body ->
-                    detailLiveData.postValue(checkResponse(body))
+            override fun onResponse(call: Call<Result>, response: Response<Result>) {
+                response.body()?.let {
+                    detailLiveData.postValue(checkResponse(it))
                 }
             }
         })
     }
 
-    private fun checkResponse(response: String): AppStateGetMovieDetails {
-        val movieDTO = Gson().fromJson(response, Result::class.java)
-
-        return if (movieDTO != null) {
-            AppStateGetMovieDetails.Success(movieDTO)
-        } else {
-            AppStateGetMovieDetails.Error(ParseException("Не смог распарсить Т_Т", 0))
-        }
+    private fun checkResponse(response: Result): AppStateGetMovieDetails {
+        return AppStateGetMovieDetails.Success(response)
     }
 }

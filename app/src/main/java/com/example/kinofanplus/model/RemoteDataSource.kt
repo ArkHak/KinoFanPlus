@@ -1,20 +1,31 @@
 package com.example.kinofanplus.model
 
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import com.example.kinofanplus.model.movie_list_gson.Result
+import com.google.gson.GsonBuilder
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 class RemoteDataSource {
 
-    fun getMovieDetail(link: String, callback: Callback) {
+    private val movieApi = Retrofit.Builder()
+        .baseUrl("https://api.themoviedb.org/")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+        .build().create(MovieApi::class.java)
 
-        val client = OkHttpClient()
 
-        val request = Request.Builder()
-            .url(link)
-            .get()
-            .build()
+    fun getMovieDetail(id: Int, callback: Callback<Result>) {
 
-        val response = client.newCall(request).enqueue(callback)
+//        val client = OkHttpClient()
+//
+//        val request = Request.Builder()
+//            .url(link)
+//            .get()
+//            .build()
+//
+//        client.newCall(request).enqueue(callback)
+
+        movieApi.getMovieDetail(id).enqueue(callback)
     }
 }

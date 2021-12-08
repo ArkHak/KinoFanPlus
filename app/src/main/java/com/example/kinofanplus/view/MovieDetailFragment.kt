@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.FragmentMovieDetailBinding
 import com.example.kinofanplus.model.movie_list_gson.Result
 import com.example.kinofanplus.viewmodel.AppStateGetMovieDetails
 import com.example.kinofanplus.viewmodel.MovieDetailVM
-import com.squareup.picasso.Picasso
 
 class MovieDetailFragment : Fragment() {
 
@@ -69,19 +69,14 @@ class MovieDetailFragment : Fragment() {
             releaseDateMovie.text = movie.releaseDate
             voteAverageMovie.text = movie.voteAverage.toString()
             overviewMovie.text = movie.overview
+
+            //TODO placeholder
+            moviePoster.load("$POSTER_BASE_URL${movie.posterPath}"){
+                placeholder(R.drawable.placeholder2)
+                error(R.drawable.tmp_no_poster)
+            }
+            backgroundPoster.load("$POSTER_BASE_URL${movie.posterPath}")
         }
-
-        Picasso.get()
-            .load("$POSTER_BASE_URL${movie.posterPath}")
-            //.placeholder(R.drawable.user_placeholder)
-            .error(R.drawable.tmp_no_poster)
-            .into(binding.moviePoster)
-
-        Picasso.get()
-            .load("$POSTER_BASE_URL${movie.posterPath}")
-            //.placeholder(R.drawable.user_placeholder)
-            .error(R.drawable.tmp_no_poster)
-            .into(binding.backgroundPoster)
     }
 
     override fun onDestroyView() {
