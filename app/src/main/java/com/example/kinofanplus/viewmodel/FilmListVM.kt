@@ -10,28 +10,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FilmListVM(
-    private val liveDataToObserve: MutableLiveData<AppStateGetMovieList> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl()
+    private val repository: Repository = RepositoryImpl(),
+    private val listLiveData: MutableLiveData<AppStateGetMovieList> = MutableLiveData()
 ) : ViewModel() {
 
-    val liveData: LiveData<AppStateGetMovieList> = liveDataToObserve
+    val liveData: LiveData<AppStateGetMovieList> = listLiveData
 
-    //    fun getMovieFromLocalSource() = getDataFromLocalSource()
-    fun getMovieFromServer() = getMovieFromServerSource()
 
-    private fun getDataFromLocalSource() {
-        liveDataToObserve.value = AppStateGetMovieList.Loading
+    fun getMovieFromServerSource() {
+        listLiveData.value = AppStateGetMovieList.Loading
 
         CoroutineScope(Dispatchers.IO).launch {
-            liveDataToObserve.postValue(AppStateGetMovieList.Success(repository.getMovieFromServer()))
+            listLiveData.postValue(AppStateGetMovieList.Success(repository.getMovieFromServer()))
         }
     }
 
-    private fun getMovieFromServerSource() {
-        liveDataToObserve.value = AppStateGetMovieList.Loading
+    fun getDataFromLocalSource() {
+        listLiveData.value = AppStateGetMovieList.Loading
 
         CoroutineScope(Dispatchers.IO).launch {
-            liveDataToObserve.postValue(AppStateGetMovieList.Success(repository.getMovieFromServer()))
+            listLiveData.postValue(AppStateGetMovieList.Success(repository.getMovieFromLocalSource()))
         }
     }
+
+
 }

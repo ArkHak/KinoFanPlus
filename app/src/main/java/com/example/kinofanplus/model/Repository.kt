@@ -1,8 +1,8 @@
 package com.example.kinofanplus.model
 
-import com.example.kinofanplus.model.movie_list_gson.Result
+import com.example.kinofanplus.model.movie_list_gson.MovieDTO
 
 interface Repository {
-    fun getMovieFromServer(): List<Result>
-    fun getMovieFromLocalSource(): List<Movie>
+    fun getMovieFromServer(): List<MovieDTO>
+    fun getMovieFromLocalSource(): List<MovieDTO>
 }

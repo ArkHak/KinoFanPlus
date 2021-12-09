@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.FragmentMovieDetailBinding
-import com.example.kinofanplus.model.movie_list_gson.Result
+import com.example.kinofanplus.model.movie_list_gson.MovieDTO
 import com.example.kinofanplus.viewmodel.AppStateGetMovieDetails
 import com.example.kinofanplus.viewmodel.MovieDetailVM
 
@@ -18,8 +18,6 @@ class MovieDetailFragment : Fragment() {
 
     companion object {
         const val MOVIE_KEY = "MOVIE_KEY"
-        fun newInstance(bundle: Bundle): MovieDetailFragment =
-            MovieDetailFragment().apply { arguments = bundle }
     }
 
     private val viewModel: MovieDetailVM by lazy {
@@ -62,7 +60,7 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun displayMovie(movie: Result) {
+    private fun displayMovie(movie: MovieDTO) {
         with(binding) {
             titleMovie.text = movie.title
             originalTitleMovie.text = movie.originalTitle

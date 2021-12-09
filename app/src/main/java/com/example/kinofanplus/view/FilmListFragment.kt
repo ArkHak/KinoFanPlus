@@ -51,7 +51,7 @@ class FilmListFragment : Fragment() {
             renderData(state)
         }
 
-        viewModel.getMovieFromServer()
+        viewModel.getMovieFromServerSource()
     }
 
     private fun renderData(state: AppStateGetMovieList?) {

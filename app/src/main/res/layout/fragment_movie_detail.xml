@@ -13,7 +13,7 @@
         android:adjustViewBounds="true"
         android:alpha="0.25"
         android:contentDescription="TODO"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/tmp_no_poster" />
 
     <ImageView

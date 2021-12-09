@@ -1,6 +1,6 @@
 package com.example.kinofanplus.model
 
-import com.example.kinofanplus.model.movie_list_gson.Result
+import com.example.kinofanplus.model.movie_list_gson.MovieDTO
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +24,7 @@ class RemoteDataSource {
         .create(MovieApi::class.java)
 
 
-    fun getMovieDetail(id: Int, callback: Callback<Result>) {
+    fun getMovieDetail(id: Int, callback: Callback<MovieDTO>) {
         movieApi.getMovieDetail(id).enqueue(callback)
     }
 }

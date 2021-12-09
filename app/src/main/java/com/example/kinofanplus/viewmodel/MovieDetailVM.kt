@@ -3,11 +3,10 @@ package com.example.kinofanplus.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.kinofanplus.BuildConfig
 import com.example.kinofanplus.model.DetailsRepository
 import com.example.kinofanplus.model.DetailsRepositoryImpl
 import com.example.kinofanplus.model.RemoteDataSource
-import com.example.kinofanplus.model.movie_list_gson.Result
+import com.example.kinofanplus.model.movie_list_gson.MovieDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,16 +20,13 @@ class MovieDetailVM : ViewModel() {
     fun getMovieFromRemoteSource(id: Int) {
         detailLiveData.value = AppStateGetMovieDetails.Loading
 
-        val link =
-            "https://api.themoviedb.org/3/movie/$id?api_key=${BuildConfig.MOVIE_API_KEY}&language=ru-RU"
+        repository.getMovieDetailFromServer(id, object : Callback<MovieDTO> {
 
-        repository.getMovieDetailFromServer(id, object : Callback<Result> {
-
-            override fun onFailure(call: Call<Result>, t: Throwable) {
+            override fun onFailure(call: Call<MovieDTO>, t: Throwable) {
                 detailLiveData.postValue(AppStateGetMovieDetails.Error(t))
             }
 
-            override fun onResponse(call: Call<Result>, response: Response<Result>) {
+            override fun onResponse(call: Call<MovieDTO>, response: Response<MovieDTO>) {
                 response.body()?.let {
                     detailLiveData.postValue(checkResponse(it))
                 }
@@ -38,7 +34,7 @@ class MovieDetailVM : ViewModel() {
         })
     }
 
-    private fun checkResponse(response: Result): AppStateGetMovieDetails {
+    private fun checkResponse(response: MovieDTO): AppStateGetMovieDetails {
         return AppStateGetMovieDetails.Success(response)
     }
 }

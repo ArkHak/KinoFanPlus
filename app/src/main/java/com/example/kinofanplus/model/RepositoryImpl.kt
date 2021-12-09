@@ -1,9 +1,9 @@
 package com.example.kinofanplus.model
 
-import com.example.kinofanplus.model.movie_list_gson.Result
-import com.example.kinofanplus.model.movie_list_gson.getListMovies
+import com.example.kinofanplus.model.movie_list_gson.MovieDTO
+import com.example.kinofanplus.model.movie_list_gson.getListMoviesFromServer
 
 class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): List<Result> = getListMovies()
-    override fun getMovieFromLocalSource(): List<Movie> = getLazyListMovies()
+    override fun getMovieFromServer(): List<MovieDTO> = getListMoviesFromServer()
+    override fun getMovieFromLocalSource(): List<MovieDTO> = TODO("Метод локальной БД")
 }

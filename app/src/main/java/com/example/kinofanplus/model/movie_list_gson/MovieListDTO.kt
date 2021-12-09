@@ -12,19 +12,17 @@ import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
 data class MovieListDTO(
-    val dates: Dates,
     val page: Int,
-    val results: List<Result>,
+    val results: List<MovieDTO>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
     val totalResults: Int
 )
 
-fun getListMovies(): MutableList<Result> {
-    val dataList: MutableList<Result> = mutableListOf()
+fun getListMoviesFromServer(): MutableList<MovieDTO> {
+    val dataList: MutableList<MovieDTO> = mutableListOf()
 
-//TODO на retrofit засунуть в coroutines
 
     val uri =
         URL("https://api.themoviedb.org/3/movie/now_playing?api_key=${BuildConfig.MOVIE_API_KEY}&language=ru-RU&page=1")
