@@ -67,9 +67,11 @@ class MovieDetailFragment : Fragment() {
             releaseDateMovie.text = movie.releaseDate
             voteAverageMovie.text = movie.voteAverage.toString()
             overviewMovie.text = movie.overview
+            Toast.makeText(requireContext(), movie.adult.toString(), Toast.LENGTH_LONG)
+                .show()
 
             //TODO placeholder
-            moviePoster.load("$POSTER_BASE_URL${movie.posterPath}"){
+            moviePoster.load("$POSTER_BASE_URL${movie.posterPath}") {
                 placeholder(R.drawable.placeholder2)
                 error(R.drawable.tmp_no_poster)
             }

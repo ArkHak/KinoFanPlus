@@ -3,14 +3,14 @@ package com.example.kinofanplus.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.kinofanplus.model.Repository
-import com.example.kinofanplus.model.RepositoryImpl
+import com.example.kinofanplus.model.ListRepository
+import com.example.kinofanplus.model.ListRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FilmListVM(
-    private val repository: Repository = RepositoryImpl(),
+    private val repository: ListRepository = ListRepositoryImpl(),
     private val listLiveData: MutableLiveData<AppStateGetMovieList> = MutableLiveData()
 ) : ViewModel() {
 
