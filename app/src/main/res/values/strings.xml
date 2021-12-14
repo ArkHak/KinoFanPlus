@@ -2,4 +2,7 @@
     <string name="app_name">KinoFanPlus</string>
     <string name="films">Films</string>
     <string name="favorites_films">Favorites films</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="settings_adult">Allow adult content:</string>
 </resources>

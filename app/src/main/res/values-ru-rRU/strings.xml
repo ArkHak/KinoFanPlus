@@ -3,4 +3,8 @@
     <string name="app_name">KinoFanPlus</string>
     <string name="films">Фильмы</string>
     <string name="favorites_films">Любимые фильмы</string>
+    <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_adult">Разрешить взрослый контент:</string>
+
 </resources>

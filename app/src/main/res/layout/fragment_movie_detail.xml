@@ -30,7 +30,6 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_navigation_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -146,8 +145,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:paddingEnd="8dp"
                 android:fontFamily="sans-serif-light"
+                android:paddingEnd="8dp"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,20 +156,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/button_navigation_panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/secondaryColor"
-        app:itemIconTint="@drawable/color_nav_button_selected"
-        app:itemRippleColor="@color/primaryColor"
-        app:itemTextColor="@drawable/color_nav_button_selected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_btn_navigation" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
