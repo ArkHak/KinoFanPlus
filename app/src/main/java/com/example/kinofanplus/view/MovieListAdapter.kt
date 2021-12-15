@@ -33,7 +33,7 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieHolder>() {
             //TODO Добавить изображение на загрузку
             Picasso.get()
                 .load("$POSTER_BASE_URL${movie.posterPath}")
-                //.placeholder(R.drawable.user_placeholder)
+                .placeholder(R.drawable.placeholder2)
                 .error(R.drawable.tmp_no_poster)
                 .into(binding.moviePoster);
             itemView.setOnClickListener {

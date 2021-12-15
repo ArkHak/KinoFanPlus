@@ -24,7 +24,7 @@ class RemoteDataSource {
         .create(MovieApi::class.java)
 
 
-    fun getMovieDetail(id: Int, callback: Callback<MovieDTO>) {
+    fun getMovieDetail(id: Long, callback: Callback<MovieDTO>) {
         movieApi.getMovieDetail(id).enqueue(callback)
     }
 }

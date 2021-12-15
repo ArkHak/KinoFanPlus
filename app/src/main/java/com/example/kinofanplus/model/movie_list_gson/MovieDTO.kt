@@ -12,7 +12,7 @@ data class MovieDTO(
     val backdropPath: String,
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
-    val id: Int,
+    val id: Long,
     @SerializedName("original_title")
     val originalTitle: String,
     val overview: String,

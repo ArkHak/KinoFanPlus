@@ -37,7 +37,7 @@ class FilmListFragment : Fragment() {
 
         adapter.listenerClick = MovieListAdapter.OnMovieClickListener { movie ->
             Bundle().also { bundle ->
-                bundle.putInt(MovieDetailFragment.MOVIE_KEY, movie.id)
+                bundle.putLong(MovieDetailFragment.MOVIE_KEY, movie.id)
                 findNavController(requireParentFragment()).navigate(
                     R.id.action_navigation_list_films_to_movieDetailFragment,
                     bundle

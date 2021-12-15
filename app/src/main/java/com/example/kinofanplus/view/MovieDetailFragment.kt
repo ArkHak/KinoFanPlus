@@ -43,7 +43,7 @@ class MovieDetailFragment : Fragment() {
             renderData(state)
         }
 
-        arguments?.getInt(MOVIE_KEY)?.let { id ->
+        arguments?.getLong(MOVIE_KEY)?.let { id ->
             viewModel.getMovieFromRemoteSource(id)
         }
     }
@@ -70,7 +70,6 @@ class MovieDetailFragment : Fragment() {
             Toast.makeText(requireContext(), movie.adult.toString(), Toast.LENGTH_LONG)
                 .show()
 
-            //TODO placeholder
             moviePoster.load("$POSTER_BASE_URL${movie.posterPath}") {
                 placeholder(R.drawable.placeholder2)
                 error(R.drawable.tmp_no_poster)

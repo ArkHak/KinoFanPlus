@@ -17,7 +17,7 @@ class MovieDetailVM : ViewModel() {
 
     val liveData: LiveData<AppStateGetMovieDetails> = detailLiveData
 
-    fun getMovieFromRemoteSource(id: Int) {
+    fun getMovieFromRemoteSource(id: Long) {
         detailLiveData.value = AppStateGetMovieDetails.Loading
 
         repository.getMovieDetailFromServer(id, object : Callback<MovieDTO> {
