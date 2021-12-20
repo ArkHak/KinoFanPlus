@@ -42,9 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings) {
-            navigationController.navigate(R.id.settingsFragment)
+        return when (item.itemId) {
+            R.id.settings -> {
+                navigationController.navigate(R.id.settingsFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 }

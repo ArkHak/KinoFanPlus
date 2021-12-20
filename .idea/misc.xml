@@ -10,10 +10,12 @@
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/drawable/color_nav_batton_selected.xml" value="0.25" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/drawable/gradient_drawable_poster.xml" value="0.3828125" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/drawable/ic_star_rating_24.xml" value="0.3828125" />
+        <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/drawable/selector_like.xml" value="0.3828125" />
+        <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/drawable/selector_viewed.xml" value="0.2703125" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/fragment_favorite_film_list.xml" value="0.35260416666666666" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/fragment_film_list.xml" value="0.264" />
-        <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/fragment_movie_detail.xml" value="0.264" />
+        <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/fragment_movie_detail.xml" value="0.3888888888888889" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/layout/item_movie_list.xml" value="0.18613138686131386" />
         <entry key="..\:/GB/app/AndroidOnKotlin/KinoFanPlus/app/src/main/res/menu/menu_btn_navigation.xml" value="0.36666666666666664" />
@@ -22,7 +24,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

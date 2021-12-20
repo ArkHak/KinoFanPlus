@@ -26,6 +26,7 @@ class MovieDetailFragment : Fragment() {
 
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
+    private lateinit var movieDetail: MovieDTO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,23 +53,26 @@ class MovieDetailFragment : Fragment() {
         when (state) {
             is AppStateGetMovieDetails.Success -> {
                 displayMovie(state.movie)
+                displayRendersWidgets(state.movie.id)
+                actionToggleButtonLikeMovie()
+                actionToggleButtonViewedMovie()
             }
             is AppStateGetMovieDetails.Error -> {
                 Toast.makeText(requireContext(), "Ошибка при загрузке фильма", Toast.LENGTH_LONG)
                     .show()
             }
         }
+
     }
 
     private fun displayMovie(movie: MovieDTO) {
         with(binding) {
+            movieDetail = movie
             titleMovie.text = movie.title
             originalTitleMovie.text = movie.originalTitle
             releaseDateMovie.text = movie.releaseDate
             voteAverageMovie.text = movie.voteAverage.toString()
             overviewMovie.text = movie.overview
-            Toast.makeText(requireContext(), movie.adult.toString(), Toast.LENGTH_LONG)
-                .show()
 
             moviePoster.load("$POSTER_BASE_URL${movie.posterPath}") {
                 placeholder(R.drawable.placeholder2)
@@ -76,6 +80,31 @@ class MovieDetailFragment : Fragment() {
             }
             backgroundPoster.load("$POSTER_BASE_URL${movie.posterPath}")
         }
+    }
+
+    private fun actionToggleButtonLikeMovie() {
+        binding.isLiked.setOnClickListener {
+            if (binding.isLiked.isChecked) {
+                viewModel.putLikeMovie(movieDetail)
+            } else {
+                viewModel.removeLikedMovie(movieDetail.id)
+            }
+        }
+    }
+
+    private fun actionToggleButtonViewedMovie() {
+        binding.isViewed.setOnClickListener {
+            if (binding.isLiked.isChecked) {
+                viewModel.putViewedMovie(movieDetail)
+            } else {
+                viewModel.removeViewedMovie(movieDetail.id)
+            }
+        }
+    }
+
+    private fun displayRendersWidgets(id: Long) {
+        binding.isLiked.isChecked = viewModel.checkOnFavoriteMovie(id)
+        binding.isViewed.isChecked = viewModel.checkOnViewedMovie(id)
     }
 
     override fun onDestroyView() {

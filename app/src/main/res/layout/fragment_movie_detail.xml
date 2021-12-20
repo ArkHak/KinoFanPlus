@@ -63,6 +63,39 @@
 
             </androidx.cardview.widget.CardView>
 
+            <ToggleButton
+                android:id="@+id/is_liked"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/selector_like"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/movie_card_poster"
+                app:layout_constraintTop_toTopOf="@id/movie_card_poster" />
+
+            <ToggleButton
+                android:id="@+id/is_viewed"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/selector_viewed"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/movie_card_poster"
+                app:layout_constraintTop_toBottomOf="@id/is_liked" />
+
+            <ImageButton
+                android:id="@+id/my_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/movie_card_poster"
+                app:layout_constraintTop_toBottomOf="@id/is_viewed" />
+
 
             <TextView
                 android:id="@+id/title_movie"
