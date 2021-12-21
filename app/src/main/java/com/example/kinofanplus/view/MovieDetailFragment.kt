@@ -54,6 +54,7 @@ class MovieDetailFragment : Fragment() {
             is AppStateGetMovieDetails.Success -> {
                 displayMovie(state.movie)
                 displayRendersWidgets(state.movie.id)
+
                 actionToggleButtonLikeMovie()
                 actionToggleButtonViewedMovie()
             }
@@ -94,7 +95,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun actionToggleButtonViewedMovie() {
         binding.isViewed.setOnClickListener {
-            if (binding.isLiked.isChecked) {
+            if (binding.isViewed.isChecked) {
                 viewModel.putViewedMovie(movieDetail)
             } else {
                 viewModel.removeViewedMovie(movieDetail.id)

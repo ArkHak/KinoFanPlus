@@ -7,7 +7,10 @@ interface LocalRepository {
     fun getAllMyMovie(): List<MyMovieEntity>
 
     fun putLikeMovie(movie: MyMovieEntity)
-    fun getLikeMovieForId(id: Long): Boolean
     fun removeLikedMovie(id: Long)
+    fun getLikeMovieForId(id: Long): Boolean
+
+    fun putViewedMovie(movie: MyMovieEntity)
+    fun removeViewedMovie(id: Long)
     fun getViewedMovieForId(id: Long): Boolean
 }

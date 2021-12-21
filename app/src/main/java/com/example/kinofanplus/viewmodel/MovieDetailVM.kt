@@ -39,12 +39,12 @@ class MovieDetailVM : ViewModel() {
         return AppStateGetMovieDetails.Success(response)
     }
 
-    fun putLikeMovie(movieDTO: MovieDTO) {
+    fun putLikeMovie(movieDetail: MovieDTO) {
         localRepository.putLikeMovie(
             MyMovieEntity(
-                id = movieDTO.id,
-                title = movieDTO.title,
-                releaseDate = movieDTO.releaseDate,
+                id = movieDetail.id,
+                title = movieDetail.title,
+                releaseDate = movieDetail.releaseDate,
                 myReview = "",
                 isLiked = true,
                 isViewed = false
@@ -65,12 +65,20 @@ class MovieDetailVM : ViewModel() {
     }
 
     fun putViewedMovie(movieDetail: MovieDTO) {
-        TODO("Not yet implemented")
+        localRepository.putLikeMovie(
+            MyMovieEntity(
+                id = movieDetail.id,
+                title = movieDetail.title,
+                releaseDate = movieDetail.releaseDate,
+                myReview = "",
+                isLiked = false,
+                isViewed = true
+            )
+        )
     }
 
     fun removeViewedMovie(id: Long) {
-        TODO("Not yet implemented")
+        localRepository.removeViewedMovie(id)
     }
-
 
 }
