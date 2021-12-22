@@ -65,7 +65,7 @@ class MovieDetailVM : ViewModel() {
     }
 
     fun putViewedMovie(movieDetail: MovieDTO) {
-        localRepository.putLikeMovie(
+        localRepository.putViewedMovie(
             MyMovieEntity(
                 id = movieDetail.id,
                 title = movieDetail.title,
@@ -79,6 +79,19 @@ class MovieDetailVM : ViewModel() {
 
     fun removeViewedMovie(id: Long) {
         localRepository.removeViewedMovie(id)
+    }
+
+
+    fun checkOnReviewedMovie(id: Long): Boolean {
+        return localRepository.getReviewedMovieForId(id)
+    }
+
+    fun putReviewedOnMovie(id: Long, reviewed: String) {
+        localRepository.putReviewedOnMovie(id, reviewed)
+    }
+
+    fun getReviewedTextOnMovie(id: Long): String {
+        return localRepository.getReviewedTextOnMovie(id)
     }
 
 }

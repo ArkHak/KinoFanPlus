@@ -10,4 +10,5 @@
     <color name="secondaryColor">#01B4E4</color>
     <color name="primaryColor">#0D253F</color>
     <color name="tertiaryColor">#90CEA1</color>
+    <color name="reviewed_color">#F3FF35</color>
 </resources>

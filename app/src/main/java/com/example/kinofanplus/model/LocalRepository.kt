@@ -13,4 +13,8 @@ interface LocalRepository {
     fun putViewedMovie(movie: MyMovieEntity)
     fun removeViewedMovie(id: Long)
     fun getViewedMovieForId(id: Long): Boolean
+
+    fun getReviewedMovieForId(id: Long): Boolean
+    fun putReviewedOnMovie(id: Long, reviewed: String)
+    fun getReviewedTextOnMovie(id: Long): String
 }

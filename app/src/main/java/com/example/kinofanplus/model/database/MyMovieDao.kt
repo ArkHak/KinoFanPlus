@@ -37,11 +37,9 @@ interface MyMovieDao {
 
 
     @Query("SELECT myReview FROM MyMovieEntity WHERE id = :id")
-    fun getReviewByMovieID(id: Long): String
+    fun getReviewedMovieForId(id: Long): String
 
-    @Insert(onConflict = IGNORE)
-    fun insertReviewMovie(movie: MyMovieEntity)
+    @Query("UPDATE MyMovieEntity SET myReview = :reviewed WHERE id = :id")
+    fun putReviewedMovieForId(id: Long, reviewed: String)
 
-    @Update
-    fun updateReviewMovie(movie: MyMovieEntity)
 }

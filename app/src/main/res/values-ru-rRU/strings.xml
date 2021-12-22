@@ -6,5 +6,8 @@
     <string name="search">Поиск</string>
     <string name="settings">Настройки</string>
     <string name="settings_adult">Разрешить взрослый контент:</string>
+    <string name="save_reviewed">Сохранить</string>
+    <string name="cancel_reviewed">Отмена</string>
+    <string name="header_dialog_reviewed">Ваш отзыв:</string>
 
 </resources>

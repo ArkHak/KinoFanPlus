@@ -9,8 +9,7 @@ class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
     override fun putLikeMovie(movie: MyMovieEntity) {
         dao.checkingMovieForBD(movie.id)?.let { it ->
             dao.updateMovieOnLike(it.id, true)
-        } ?:
-        dao.insertLikeMovie(movie)
+        } ?: dao.insertLikeMovie(movie)
     }
 
     override fun removeLikedMovie(id: Long) {
@@ -22,7 +21,7 @@ class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
     }
 
     override fun getLikeMovieForId(id: Long): Boolean {
-        dao.checkingMovieForBD(id).let {
+        dao.checkingMovieForBD(id)?.let {
             return dao.getLikeMovieForId(id)
         }
     }
@@ -31,8 +30,7 @@ class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
     override fun putViewedMovie(movie: MyMovieEntity) {
         dao.checkingMovieForBD(movie.id)?.let { it ->
             dao.updateMovieOnViewed(it.id, true)
-        } ?:
-        dao.insertViewedMovie(movie)
+        } ?: dao.insertViewedMovie(movie)
     }
 
     override fun removeViewedMovie(id: Long) {
@@ -44,9 +42,24 @@ class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
     }
 
     override fun getViewedMovieForId(id: Long): Boolean {
-        dao.checkingMovieForBD(id).let {
+        dao.checkingMovieForBD(id)?.let {
             return dao.getViewedMovieForId(id)
         }
+    }
+
+
+    override fun getReviewedMovieForId(id: Long): Boolean {
+        dao.checkingMovieForBD(id)?.let {
+            return dao.getReviewedMovieForId(id).isNotBlank()
+        }
+    }
+
+    override fun putReviewedOnMovie(id: Long, reviewed: String) {
+        dao.putReviewedMovieForId(id, reviewed)
+    }
+
+    override fun getReviewedTextOnMovie(id: Long): String {
+        return dao.getReviewedMovieForId(id)
     }
 
 }
