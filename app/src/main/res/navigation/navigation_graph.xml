@@ -9,7 +9,13 @@
         android:id="@+id/navigation_favorites_list_films"
         android:name="com.example.kinofanplus.view.FavoriteFilmListFragment"
         android:label="fragment_favorite_film_list"
-        tools:layout="@layout/fragment_favorite_film_list" />
+        tools:layout="@layout/fragment_favorite_film_list">
+        <action
+            android:id="@+id/action_navigation_favorites_list_films_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_list_films"

@@ -9,6 +9,9 @@ interface MyMovieDao {
     @Query("SELECT * FROM MyMovieEntity")
     fun allMovieBD(): List<MyMovieEntity>
 
+    @Query("SELECT * FROM MyMovieEntity WHERE isLiked = 1")
+    fun allFavoritesMovieBD(): List<MyMovieEntity>
+
     @Query("DELETE FROM MyMovieEntity WHERE id = :id")
     fun deleteMovie(id: Long)
 

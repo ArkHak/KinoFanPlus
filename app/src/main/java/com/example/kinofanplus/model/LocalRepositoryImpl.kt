@@ -5,6 +5,7 @@ import com.example.kinofanplus.model.database.MyMovieEntity
 
 class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
     override fun getAllMyMovie(): List<MyMovieEntity> = dao.allMovieBD()
+    override fun allFavoritesMovieBD(): List<MyMovieEntity> = dao.allFavoritesMovieBD()
 
     override fun putLikeMovie(movie: MyMovieEntity) {
         dao.checkingMovieForBD(movie.id)?.let { it ->
@@ -54,12 +55,10 @@ class LocalRepositoryImpl(private val dao: MyMovieDao) : LocalRepository {
         }
     }
 
-    override fun putReviewedOnMovie(id: Long, reviewed: String) {
+    override fun putReviewedOnMovie(id: Long, reviewed: String) =
         dao.putReviewedMovieForId(id, reviewed)
-    }
 
-    override fun getReviewedTextOnMovie(id: Long): String {
-        return dao.getReviewedMovieForId(id)
-    }
+    override fun getReviewedTextOnMovie(id: Long): String = dao.getReviewedMovieForId(id)
+
 
 }

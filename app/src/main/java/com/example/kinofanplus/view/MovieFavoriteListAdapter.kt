@@ -7,46 +7,42 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kinofanplus.R
 import com.example.kinofanplus.databinding.ItemMovieListBinding
-import com.example.kinofanplus.model.movie_list_gson.MovieDTO
-import com.squareup.picasso.Picasso
+import com.example.kinofanplus.model.database.MyMovieEntity
 
-const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500/"
-
-class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieHolder>() {
-    var movieList: List<MovieDTO> = listOf()
+class MovieFavoriteListAdapter : RecyclerView.Adapter<MovieFavoriteListAdapter.MovieHolder>() {
+    var movieList: List<MyMovieEntity> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    var listenerClick: OnMovieClickListener? = null
+    var listenerFavoriteClick: OnMovieClickListener? = null
 
     inner class MovieHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = ItemMovieListBinding.bind(item)
-        fun bind(movie: MovieDTO) {
+        fun bind(movie: MyMovieEntity) {
             with(binding) {
                 movieTitle.text = movie.title
                 movieReleaseDate.text = movie.releaseDate
-                movieVoteAverage.text = movie.voteAverage.toString()
+                // TODO: 22.12.2021 Загрузка данных через интернет?
             }
 
-            Picasso.get()
-                .load("$POSTER_BASE_URL${movie.posterPath}")
-                .placeholder(R.drawable.placeholder2)
-                .error(R.drawable.tmp_no_poster)
-                .into(binding.moviePoster)
             itemView.setOnClickListener {
-                listenerClick?.onMovieClick(movie)
+                listenerFavoriteClick?.onMovieClick(movie)
             }
+
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MovieFavoriteListAdapter.MovieHolder =
         MovieHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
         )
 
-    override fun onBindViewHolder(holder: MovieHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieFavoriteListAdapter.MovieHolder, position: Int) {
         holder.bind(movieList[position])
         Log.d("TAG", position.toString())
     }
@@ -54,6 +50,6 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieHolder>() {
     override fun getItemCount(): Int = movieList.size
 
     fun interface OnMovieClickListener {
-        fun onMovieClick(movie: MovieDTO)
+        fun onMovieClick(movie: MyMovieEntity)
     }
 }
