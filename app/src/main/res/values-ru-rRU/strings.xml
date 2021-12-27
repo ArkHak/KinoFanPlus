@@ -9,5 +9,6 @@
     <string name="save_reviewed">Сохранить</string>
     <string name="cancel_reviewed">Отмена</string>
     <string name="header_dialog_reviewed">Ваш отзыв:</string>
+    <string name="contacts">Контакты</string>
 
 </resources>

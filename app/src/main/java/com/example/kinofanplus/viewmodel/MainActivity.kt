@@ -1,8 +1,15 @@
 package com.example.kinofanplus.viewmodel
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.database.Cursor
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +21,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val permissionResult =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+            when {
+                result -> getContact()
+                //узнать, что юзер поставил галочку "не показывать"
+                shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) -> {
+                    Toast.makeText(this, "Permission denied allow", Toast.LENGTH_SHORT).show()
+                }
+                else -> Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -47,7 +66,41 @@ class MainActivity : AppCompatActivity() {
                 navigationController.navigate(R.id.settingsFragment)
                 true
             }
+            R.id.contacts -> {
+                permissionResult.launch(Manifest.permission.READ_CONTACTS)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    @SuppressLint("Range")
+    private fun getContact() {
+        val cursor: Cursor? = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            null,
+            null,
+            ContactsContract.Contacts.DISPLAY_NAME + " ASC"
+        )
+
+        val contacts = mutableListOf<String>()
+        cursor?.let {
+            for (i in 0..cursor.count) {
+                if (cursor.moveToPosition(i)) {
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    contacts.add(name)
+                }
+            }
+            it.close()
+        }
+        AlertDialog.Builder(this)
+            .setItems(contacts.toTypedArray()) { _, whitch ->
+                Toast.makeText(this, "Звоню контакту -> ${contacts[whitch]}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .setCancelable(true)
+            .show()
     }
 }
