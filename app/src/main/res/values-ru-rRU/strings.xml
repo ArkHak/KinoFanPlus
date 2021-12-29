@@ -10,5 +10,7 @@
     <string name="cancel_reviewed">Отмена</string>
     <string name="header_dialog_reviewed">Ваш отзыв:</string>
     <string name="contacts">Контакты</string>
+    <string name="location">Местоположение</string>
+    <string name="google_maps">Google карты</string>
 
 </resources>

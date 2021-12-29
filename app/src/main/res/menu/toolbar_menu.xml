@@ -7,20 +7,33 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:orderInCategory="70"
         android:title="@string/settings"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:orderInCategory="50"
-        android:title="@string/search"
         app:showAsAction="always" />
+
+<!--    <item-->
+<!--        android:id="@+id/search"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        android:orderInCategory="50"-->
+<!--        android:title="@string/search"-->
+<!--        app:showAsAction="always" />-->
 
     <item
         android:id="@+id/contacts"
         android:icon="@drawable/ic_baseline_contacts_24"
-        android:orderInCategory="100"
+        android:orderInCategory="75"
         android:title="@string/contacts"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/getLocations"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:orderInCategory="100"
+        android:title="@string/location"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/google_maps"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/google_maps"
+        app:showAsAction="always" />
 
 </menu>

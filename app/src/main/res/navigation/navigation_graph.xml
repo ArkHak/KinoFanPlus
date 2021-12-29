@@ -42,4 +42,11 @@
         tools:layout="@layout/fragment_settings" />
 
 
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.kinofanplus.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
+
 </navigation>
