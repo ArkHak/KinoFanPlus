@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "236977285391",
+    "project_id": "kinofanpluse",
+    "storage_bucket": "kinofanpluse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236977285391:android:f838be63a14dd3bea1367a",
+        "android_client_info": {
+          "package_name": "com.example.kinofanplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236977285391-phi7vmg9sef44u914vt4vtesh2qceh72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW4YbPNuwUj4QWXUfROCapXIPb0J5nJyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236977285391-phi7vmg9sef44u914vt4vtesh2qceh72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
