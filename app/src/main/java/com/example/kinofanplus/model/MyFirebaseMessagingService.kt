@@ -21,6 +21,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
         Log.d(TAG, "onMessageReceived ${remoteMessage.data}")
 
         val remoteMessageData = remoteMessage.data
