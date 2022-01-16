@@ -47,15 +47,27 @@ android {
             versionNameSuffix "-beta"
             buildConfigField "String", "TYPE", '"BETA"'
         }
-
-
     }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    flavorDimensions 'version'
+    productFlavors {
+        paid {
+            dimension 'version'
+            versionNameSuffix '.paid'
+        }
+        free {
+            dimension 'version'
+            versionNameSuffix '.free'
+        }
     }
 }
 
