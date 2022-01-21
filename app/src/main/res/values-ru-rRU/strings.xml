@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KinoFanPlus</string>
+    <string name="films">Фильмы</string>
+    <string name="favorites_films">Любимые фильмы</string>
+    <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_adult">Разрешить взрослый контент:</string>
+    <string name="save_reviewed">Сохранить</string>
+    <string name="cancel_reviewed">Отмена</string>
+    <string name="header_dialog_reviewed">Ваш отзыв:</string>
+    <string name="contacts">Контакты</string>
+    <string name="location">Местоположение</string>
+    <string name="google_maps">Google карты</string>
+
+</resources>
